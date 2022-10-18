@@ -1,5 +1,8 @@
-
+from numpy import arctan2, arccos, pi
+import numpy as np
 import struct
+from numba import jit, njit, vectorize, cuda, uint32, f8, uint8
+
 
 class Texture(object):
     def __init__(self, filename):
@@ -23,7 +26,7 @@ class Texture(object):
                     b = ord(image.read(1)) / 255
                     g = ord(image.read(1)) / 255
                     r = ord(image.read(1)) / 255
-                    pixelRow.append([r,g,b])
+                    pixelRow.append([r, g, b])
 
                 self.pixels.append(pixelRow)
 
@@ -33,10 +36,10 @@ class Texture(object):
         else:
             return None
 
+    def getEnvColor(self, dir):
+        dir = dir / np.linalg.norm(dir)
 
+        x = int((arctan2(dir[2], dir[0]) / (2 * pi) + 0.5) * self.width)
+        y = int(arccos(-dir[1]) / pi * self.height)
 
-
-
-
-
-
+        return self.pixels[y][x]
