@@ -1,10 +1,11 @@
 import numpy as np
-
+from numba import jit
 DIR_LIGHT = 0
 POINT_LIGHT = 1
 AMBIENT_LIGHT = 2
 
 
+@jit(nopython=True)
 def reflectVector(normal, direction):
     reflect = 2 * np.dot(normal, direction)
     reflect = np.multiply(reflect, normal)
@@ -13,6 +14,7 @@ def reflectVector(normal, direction):
     return reflect
 
 
+@jit(nopython=True)
 def refractVector(normal, direction, ior):
     # Snell's Law
     cosi = max(-1, min(1, np.dot(direction, normal)))

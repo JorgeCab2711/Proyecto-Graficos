@@ -35,6 +35,7 @@ class Sphere(object):
         self.radius = radius
         self.material = material
 
+    @jit(nopython=True)
     def ray_intersect(self, orig, dir):
         L = np.subtract(self.center, orig)
         tca = np.dot(L, dir)
