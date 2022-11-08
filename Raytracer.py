@@ -17,7 +17,7 @@ stone = Material(diffuse=(0.4, 0.4, 0.4), spec=8)
 grass = Material(diffuse=(0.3, 1.0, 0.3), spec=64)
 
 
-marble = Material(spec=64, texture=Texture("marble.bmp"), matType=REFLECTIVE)
+#marble = Material(spec=64, texture=Texture("marble.bmp"), matType=REFLECTIVE)
 obsidian = Material(spec=60, texture=Texture("obsi.bmp"), matType=OPAQUE)
 
 mirror = Material(diffuse=(0.9, 0.9, 0.9), spec=64, matType=REFLECTIVE)
@@ -34,20 +34,21 @@ rtx.lights.append(PointLight(point=(-1, -1, 0)))
 
 
 # Figures
-rtx.scene.append(AABB(position=(-2.5, 3, -10),
+# Portals
+# left obsidian
+rtx.scene.append(AABB(position=(-3, 3, -10),
                  size=(2, 2, 2), material=obsidian))
 
-rtx.scene.append(AABB(position=(-2.5, 1, -10),
+rtx.scene.append(AABB(position=(-3, 1, -10),
                  size=(2, 2, 2), material=obsidian))
 
-rtx.scene.append(AABB(position=(-2.5, -1, -10),
+rtx.scene.append(AABB(position=(-3, -1, -10),
                  size=(2, 2, 2), material=obsidian))
 
-rtx.scene.append(AABB(position=(-2.5, -3, -10),
+rtx.scene.append(AABB(position=(-3, -3, -10),
                  size=(2, 2, 2), material=obsidian))
 
-#
-
+# right obsidian
 rtx.scene.append(AABB(position=(3, 3, -10),
                  size=(2, 2, 2), material=obsidian))
 
@@ -60,17 +61,19 @@ rtx.scene.append(AABB(position=(3, -1, -10),
 rtx.scene.append(AABB(position=(3, -3, -10),
                  size=(2, 2, 2), material=obsidian))
 
-#
+# bottom
 rtx.scene.append(AABB(position=(1, -3, -10),
                  size=(2, 2, 2), material=obsidian))
 
 rtx.scene.append(AABB(position=(2, -3, -10),
                  size=(2, 2, 2), material=obsidian))
-
+# Top
+rtx.scene.append(AABB(position=(1, 3, -10),
+                 size=(2, 2, 2), material=obsidian))
 
 rtx.glRender()
 
 rtx.glFinish("z-output.bmp")
 end = time.time()
 
-print("Compilation time: " + str(end - start))
+print("Compilation time: " + str((end - start)/60)+" minutes")
