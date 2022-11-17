@@ -31,7 +31,7 @@ rtx = Raytracer(width, height)
 rtx.envMap = Texture("mine.bmp")
 
 rtx.lights.append(AmbientLight(intensity=0.1))
-rtx.lights.append(DirectionalLight(direction=(0, 0, -1), intensity=0.5))
+rtx.lights.append(DirectionalLight(direction=(0, 0, -3), intensity=0.5))
 rtx.lights.append(PointLight(point=(-1, -1, 0)))
 
 
@@ -41,6 +41,7 @@ rtx.lights.append(PointLight(point=(-1, -1, 0)))
 # 1
 rtx.scene.append(AABB(position=(-3, 3, -15),
                  size=(2, 2, 2), material=obsidian))
+
 # 2
 rtx.scene.append(AABB(position=(-3, 1, -15),
                  size=(2, 2, 2), material=obsidian))
@@ -90,25 +91,33 @@ rtx.scene.append(AABB(position=(1, 3, -15),
                  size=(2, 2, 2), material=obsidian))
 
 # # obsidian matter
+# 15
 rtx.scene.append(AABB(position=(-1, -3, -15),
                  size=(2, 2, 2), material=portal))
-
+# 16
 rtx.scene.append(AABB(position=(1, -3, -15),
                  size=(2, 2, 2), material=portal))
-
+# 17
 rtx.scene.append(AABB(position=(-1, -1, -15),
                  size=(2, 2, 2), material=portal))
-
+# 18
 rtx.scene.append(AABB(position=(1, -1, -15),
                  size=(2, 2, 2), material=portal))
-
+# 19
 rtx.scene.append(AABB(position=(-1, 1, -15),
                  size=(2, 2, 2), material=portal))
-
+# 20
 rtx.scene.append(AABB(position=(1, 1, -15),
                  size=(2, 2, 2), material=portal))
 
+# RENDER OBJ
 rtx.glRender()
+rtx.glLoadModel("model/steve.obj",
+                translate=V3(0, -3, -10),
+                scale=V3(4.4, 4.4, 4.4),
+                rotate=V3(0, -90, 0))
+
+rtx.active_texture = Texture("model/Steve.bmp")
 
 rtx.glFinish("z-output.bmp")
 end = time.time()
